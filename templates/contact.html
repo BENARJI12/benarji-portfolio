@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | {{ profile.name }} — Software Developer{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 4rem;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag blue-tag">Get in Touch</span>
+      <h1 class="section-title text-gradient">Contact P. Benarji Rathnam</h1>
+      <p class="section-subtitle">
+        Have questions regarding my projects, engineering experience, or job opportunities? Reach out directly.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Contact Details Card -->
+      <div class="contact-info-card">
+        <h2 class="contact-info-title">Direct Communication</h2>
+        <p class="contact-info-text">
+          Available for full-time Software Developer, Full Stack, and Cloud/DevOps roles in Hyderabad, 
+          India or remote worldwide.
+        </p>
+
+        <div class="contact-methods">
+          <div class="contact-method-item">
+            <div class="method-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <div class="method-details">
+              <span class="method-label">Direct Email</span>
+              <a href="mailto:{{ profile.email }}" class="method-val">{{ profile.email }}</a>
+            </div>
+          </div>
+
+          <div class="contact-method-item">
+            <div class="method-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div class="method-details">
+              <span class="method-label">Phone</span>
+              <a href="tel:+916303066179" class="method-val">{{ profile.phone }}</a>
+            </div>
+          </div>
+
+          <div class="contact-method-item">
+            <div class="method-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <div class="method-details">
+              <span class="method-label">Location</span>
+              <span class="method-val">{{ profile.location }}</span>
+            </div>
+          </div>
+
+          <div class="contact-method-item">
+            <div class="method-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </div>
+            <div class="method-details">
+              <span class="method-label">LinkedIn</span>
+              <a href="{{ profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="method-val">
+                linkedin.com/in/benarji-p-126a52305
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form Card -->
+      <div class="contact-form-card" id="contact-form-wrapper">
+        <div id="form-status" role="status" aria-live="polite"></div>
+
+        <form id="contact-form" action="{{ url_for('contact') }}" method="POST" novalidate>
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+          <!-- Honeypot -->
+          <div class="hp-field">
+            <label for="hp-field-standalone">Leave empty</label>
+            <input type="text" id="hp-field-standalone" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="name" class="form-label">Full Name *</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              class="form-control" 
+              placeholder="e.g. John Doe" 
+              required 
+              minlength="2" 
+              maxlength="100"
+              autocomplete="name"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address *</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              class="form-control" 
+              placeholder="e.g. john@example.com" 
+              required 
+              maxlength="120"
+              autocomplete="email"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="subject" class="form-label">
+              Subject <span class="optional">(Optional)</span>
+            </label>
+            <input 
+              type="text" 
+              id="subject" 
+              name="subject" 
+              class="form-control" 
+              placeholder="e.g. Full Stack Developer Opening" 
+              maxlength="150"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Message *</label>
+            <textarea 
+              id="message" 
+              name="message" 
+              class="form-control" 
+              placeholder="Write your message here (min. 10 characters)..." 
+              required 
+              minlength="10" 
+              maxlength="3000"
+            ></textarea>
+          </div>
+
+          <button type="submit" id="contact-submit-btn" class="btn btn-primary" style="width: 100%;">
+            <span>Send Message</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

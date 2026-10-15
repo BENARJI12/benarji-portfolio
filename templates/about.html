@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}About | {{ profile.name }} — Software Developer{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 4rem;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Professional Profile</span>
+      <h1 class="section-title text-gradient">About P. Benarji Rathnam</h1>
+      <p class="section-subtitle">
+        Software Developer, Full Stack Engineer & Cloud Developer based in Hyderabad, India.
+      </p>
+    </div>
+
+    <!-- Main About Grid -->
+    <div class="about-grid">
+      <div class="about-card">
+        <h2 style="font-size: 1.5rem; font-weight: 700; color: #ffffff; margin-bottom: 1rem;">
+          Engineering Mindset & Summary
+        </h2>
+        <p class="about-bio-text">
+          {{ profile.summary }}
+        </p>
+        <p class="about-bio-text">
+          Currently pursuing my Bachelor of Technology in Computer Engineering at 
+          <strong>Matrusri Engineering College</strong>, I emphasize software craftsmanship, 
+          modular system design, and rigorous testing. My practical work spans building decentralized 
+          blockchain platforms with smart contracts, reactive frontends using React, and server-side 
+          applications with Python (Flask/Django) and Node.js.
+        </p>
+
+        <!-- Highlights Grid -->
+        <div class="about-highlights-grid">
+          <div class="highlight-item">
+            <div class="highlight-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="highlight-title">Best Performer Award</div>
+              <div class="highlight-desc">Elevate Labs AI & ML Internship (2025)</div>
+            </div>
+          </div>
+
+          <div class="highlight-item blue">
+            <div class="highlight-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="highlight-title">Undergraduate Degree</div>
+              <div class="highlight-desc">B.Tech in Computer Engineering (CGPA 7.0)</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 2.5rem;">
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 1rem;">
+            Experience Snapshot
+          </h3>
+          {% for exp in experience %}
+            <div style="background: rgba(11, 14, 20, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap;">
+                <span style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">{{ exp.role }}</span>
+                <span style="font-size: 0.85rem; color: var(--purple-light); font-family: var(--font-mono);">{{ exp.period }}</span>
+              </div>
+              <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem;">
+                {{ exp.company }} &bull; {{ exp.location }}
+              </div>
+              <ul class="timeline-bullets">
+                {% for bullet in exp.highlights %}
+                  <li>{{ bullet }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Profile Meta Card -->
+      <div class="profile-meta-card">
+        <div class="meta-header">
+          <div class="meta-avatar">BR</div>
+          <div>
+            <div class="meta-name">{{ profile.name }}</div>
+            <div class="meta-tagline">{{ profile.headline }}</div>
+          </div>
+        </div>
+
+        <ul class="meta-list">
+          <li class="meta-item">
+            <span class="meta-label">Location:</span>
+            <span class="meta-val">{{ profile.location }}</span>
+          </li>
+          <li class="meta-item">
+            <span class="meta-label">Email:</span>
+            <span class="meta-val">{{ profile.email }}</span>
+          </li>
+          <li class="meta-item">
+            <span class="meta-label">Phone:</span>
+            <span class="meta-val">{{ profile.phone }}</span>
+          </li>
+          <li class="meta-item">
+            <span class="meta-label">Languages:</span>
+            <span class="meta-val">{{ profile.languages_spoken | join(', ') }}</span>
+          </li>
+        </ul>
+
+        <div class="meta-strengths">
+          <div class="meta-strengths-title">Core Strengths</div>
+          <div class="pill-container">
+            {% for strength in profile.strengths %}
+              <span class="pill">{{ strength }}</span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem;">
+          <a href="{{ url_for('resume', download=1) }}" class="btn btn-primary" style="width: 100%;" download>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download Official Resume</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education Section -->
+    <div style="margin-top: 4.5rem;">
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <span class="section-tag blue-tag">Education</span>
+        <h2 class="section-title text-gradient">Academic Journey</h2>
+      </div>
+
+      <div class="education-grid">
+        {% for edu in education %}
+          <div class="edu-card">
+            <h3 class="edu-degree">{{ edu.degree }}</h3>
+            <div class="edu-inst">{{ edu.institution }}</div>
+            <div class="edu-meta">
+              <span>{{ edu.location }} &bull; {{ edu.period }}</span>
+              <span class="edu-grade-badge">{{ edu.grade }}</span>
+            </div>
+            <p class="edu-desc">{{ edu.details }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
